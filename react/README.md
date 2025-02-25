@@ -6,10 +6,11 @@
   * これが保守面においても大きなメリット
 
 ## `Redux` について
-* Redux 
+* React の利便性向上を担うライブラリの内の一つ
 
 ---
 
 参考資料
 1. https://qiita.com/HorieH/items/87e155a16ad847354e71
 2. https://zenn.dev/bizlink/articles/b5c8985af8407a
+3. https://zenn.dev/hinoshin/articles/35a944a4e1c341
