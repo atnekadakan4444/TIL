@@ -2,6 +2,7 @@
 - [文字列を配列に一文字ずつ要素として格納する（chars）](#文字列を配列に一文字ずつ要素として格納する（chars）)
 - [式修飾子(while修飾子、unitl修飾子)を使った繰り返し処理](#式修飾子(while修飾子、unitl修飾子)を使った繰り返し処理)
 - [文字列の右詰め（rjust）](#文字列の右詰め（rjust）)
+- [単なるカウントではなく一致判定カウント（count）](#文字列の右詰め（rjust）)
 
 ---
 
@@ -50,6 +51,30 @@ puts rjust_str #=> 00123
 ### 関連リンク
 * https://docs.ruby-lang.org/ja/latest/method/String/i/rjust.html
 * https://paiza.jp/works/mondai/c_rank_level_up_problems/c_rank_string_step6/edit?language_uid=ruby&t=14124560d8a752f2e92186b6b9344e0d
+
+---
+
+# 単なるカウントではなく一致判定カウント（count）
+* レシーバーである配列の要素数をカウントするのが一般的な使い方
+* 引数を渡せば `==` の一致判定をした上でカウントする
+
+```ruby
+N, M, K = gets.chomp.split(" ").map(&:to_i)
+a_ary = Array.new(N)
+
+N.times do |i|
+    a_ary[i] = gets.chomp.split(" ").map(&:to_i)
+end
+
+a_ary.each do |numbers|
+    score = numbers.count(K)
+    puts score
+end
+```
+
+### 関連リンク
+* https://docs.ruby-lang.org/ja/latest/method/Array/i/count.html
+* https://paiza.jp/works/mondai/c_rank_level_up_problems/c_rank_for_boss
 
 ---
 
