@@ -64,6 +64,47 @@ p !!1     #=> true
 p !!false #=> false
 ```
 
+# 多重配列の場合
+* 参考問題
+  * https://paiza.jp/works/mondai/c_rank_level_up_problems/c_rank_sort_boss
+
+## `sort`は使用しない場合
+* 多重配列の場合は『一つ目の値同士を比較 → 二つ目の値同士を比較』ではなく、『一つ目の値同士を比較 → 【二つ目の値同士を比較する条件を満たすか否か】 → 二つ目の値同士を比較』を忘れてはならない
+  * → `# 【ここがPoint】`
+
+```ruby
+n = gets.to_i
+result = Array.new(n)
+
+n.times do |i|
+    result[i] = gets.chomp.split(" ").map(&:to_i)
+end
+
+(n-1).times do |j|
+    (n-1).times do |k|
+        if result[k][1] < result[k+1][1]
+            result[k], result[k+1] = result[k+1], result[k]
+        elsif result[k][1] == result[k+1][1] # 【ここがPoint】
+            if result[k][0] < result[k+1][0]
+                result[k], result[k+1] = result[k+1], result[k]
+            end
+        end
+    end
+end
+
+result.each do |h|
+    puts h.join(" ")
+end
+```
+
+## `sort_by`でソートの内容を指定する
+* 
+
+```ruby
+
+```
+
+
 
 ### 関連リンク
 * https://docs.ruby-lang.org/ja/latest/method/Array/i/sort.html
