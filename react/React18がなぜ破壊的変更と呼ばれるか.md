@@ -3,7 +3,8 @@
 
 ---
 以下、具体的なアップグレード内容
-# 自動バッチング
+# 自動バッチング 
+https://ja.legacy.reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#automatic-batching
 ## React17
 `バッチ処理 ... 一定期間または一定量のデータをまとめて一括で処理する方式`
 * React17においては State 更新などのイベントハンドラを一括で処理し、レンダリングはイベントハンドラが処理した時点では行われない
