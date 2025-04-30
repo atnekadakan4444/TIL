@@ -26,6 +26,7 @@ const [isFinishApi, setIsFinishApi] = useState(false);
 const [state3, setState3] = useState<String>("");
 
 const onClickExecuteApi = () => {
+  // fetch自体はReactの機能ではないのでイベントハンドラ外といえる
   fetch("https://jsonplaceholder.typicode.com/todos")
     .then((res) => res.json())
     .then((data) => {
@@ -38,5 +39,26 @@ const onClickExecuteApi = () => {
 ```
 
 ## React18
+* React18ではイベントハンドラ外であってもレンダリングが何度も発火せずバッチ処理で最適化してくれている
+  * バッチ処理での最適化を**自動で**行っており、開発者による実装は不要
+
+```javascript
+// イベントハンドラ外
+const [todos, setTodos] = useState<Todo[] | null>(null);
+const [isFinishApi, setIsFinishApi] = useState(false);
+const [state3, setState3] = useState<String>("");
+
+const onClickExecuteApi = () => {
+  // fetch内であるがバッチ処理としてレンダリングは処理が終わった後に発火する
+  fetch("https://jsonplaceholder.typicode.com/todos")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("APIのレスポンスを受け取った");
+      setTodos(data);       //=> -
+      setIsFinishApi(true); //=> -
+      setState3("update");  //=> -
+    });
+};
+```
 
 
