@@ -1,8 +1,42 @@
 # 概要
 * いくつかの機能が追加されたりしたためかなり転換期となりうるアップグレードであった
 
+## 前提
+* React17，18 のルートDOMノードの書き方が若干異なる
+* このバージョンによる書き方を誤るとそのバージョン本来の機能が使用できなくなったりするので注意が必要
+  * その旨がコンソール上で表示されていたりはする
+
+【React17】
+```javascript
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+```
+
+【React18】
+```javascript
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+root.render(
+  // <React.StrictMode>
+  <App />
+  // </React.StrictMode>
+);
+```
+
 ---
-以下、具体的なアップグレード内容
 # 自動バッチング 
 https://ja.legacy.reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#automatic-batching
 ## React17
@@ -60,5 +94,35 @@ const onClickExecuteApi = () => {
     });
 };
 ```
+
+### 補足：`flush`
+* このバッチングは自動で適用されるが、もし自動バッチングを適用したくない場合は `flushSync` という関数が用意されている
+* この関数によって部分的に自動バッチング処理を外すことが可能となる
+* 余程使われることは無い
+
+---
+# トランジション 
+https://ja.legacy.reactjs.org/blog/2022/03/29/react-v18.html#new-feature-transitions
+## React17
+
+
+```javascript
+
+```
+
+
+## React18
+
+
+```javascript
+
+```
+
+
+
+
+
+
+
 
 
