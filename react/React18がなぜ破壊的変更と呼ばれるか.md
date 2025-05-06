@@ -103,23 +103,67 @@ const onClickExecuteApi = () => {
 ---
 # トランジション 
 https://ja.legacy.reactjs.org/blog/2022/03/29/react-v18.html#new-feature-transitions
-## React17
+* **React17には無い完全な新機能**
 
-
-```javascript
-
-```
-
+## 概要
+* **ユーザーインターフェースの状態遷移（例えば、UIの切り替え、データの読み込み表示など）を、緊急度の高い更新と低い更新に分けて管理する**ための仕組み
+* 例）検索したい条件のボタンを押下した際に、選択したボタンが強調表示のため色が塗られ、選択された条件の表示内容のみが表示される
+  * React18以前）どれも同じタイミングで処理を開始していたため処理優先度のような仕様はなかった。その結果として、先の例においてボタン押下時の「ボタンの強調表示」「選択された条件の表示」が同時に処理されてしまい、比較的処理の軽いボタンの強調表示さえも遅れて処理される
+  * React18より）緊急度の低い更新（例えば、検索結果のフィルタリング、遅延ローディングなど）をトランジションとしてマークすることで、Reactは緊急度の高い更新（例えば、入力フィールドへの即時反映）を優先的に処理します。これにより、UIが途中でブロックされるのを防ぎ、より滑らかな操作感を実現している。
 
 ## React18
-
+### `startTransaction()`
+* `startTransaction()` で優先度の高くない処理を指定する
 
 ```javascript
+import { startTransition } from 'react';
 
+// Urgent: Show what was typed
+setInputValue(input);
+
+// Mark any state updates inside as transitions
+startTransition(() => {
+  // Transition: Show the results
+  setSearchQuery(input);
+});
 ```
 
+### `startTransaction()`
+* `startTransaction()` のstate管理を可能にした上位互換の関数
+  * `isPending` という State で `startTransition()` に該当する処理の処理状況を管理している
 
+```javascript
+import React, { useState, useTransition } from 'react';
 
+function Example() {
+  const [text, setText] = useState('初期テキスト');
+  const [isPending, startTransition] = useTransition();
+
+  const handleClick = () => {
+    // 緊急度の低い更新としてマーク
+    startTransition(() => {
+      setText('新しいテキスト (少し遅れて表示)');
+    });
+  };
+
+  return (
+    <div>
+      <p>テキスト: {text}</p>
+      <button onClick={handleClick} disabled={isPending}>
+        テキストを変更
+      </button>
+      {isPending && <p>更新中...</p>}
+    </div>
+  );
+}
+
+export default Example;
+```
+
+### `useDeferredValue()`
+* useTransition との違いは？
+  * `useTransition` : 特定の状態更新（setState の呼び出し）をトランジションとしてマークし、その更新全体を緊急度の低いものとして扱います。トランジションの状態 (isPending) を監視できます
+  * `useDeferredValue` : 値そのものを遅延させます。ある値が頻繁に更新される場合に、その値に依存する処理を遅らせるために使います。トランジションの状態を直接知ることはできません
 
 
 
