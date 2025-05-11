@@ -130,8 +130,7 @@ export default MyComponent;
 
 | 処理の流れ | ユーザーからの見え方 |
 | :-: | :-: |
-| ![image](https://github.com/user-attachments/assets/75e09ed6-b484-452c-899a-a30d27efee7a)
- |  |
+| ![image](https://github.com/user-attachments/assets/75e09ed6-b484-452c-899a-a30d27efee7a) | ![image](https://github.com/user-attachments/assets/164aac24-61b7-49eb-9918-2bb74862b5e4) |
 
 * 一般的な処理の流れ
   * Rails などの MVC モデルもこちらに該当する
