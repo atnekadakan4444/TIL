@@ -99,5 +99,23 @@ export default MyComponent;
   * `componentDidCatch(error, info)` ... サードパーティライブラリに頼らずにエラー境界を実装するための機能
   * `react-error-boundary` ... サードパーティライブラリ
 
+---
+# サスペンスの本質
+* **Suspenseはただローディングを表示させるためだけの機能ではない**
+  * Suspense 機能の説明において一般的に「API実行時のローディング状態の記述がラクに行えて、フォールバック画面などを代わりに表示させることが出来る」という説明がされがち
+* Suspenseの本質を理解するためには以下のワードが関連してくる
+  1. SSR  (サーバーサイドレンダリング)
+  2. Streaming (ストリーミング)
+  3. Hydration (ハイドレーション)
+
+## CSRとSSR
+* CSR (Client Side Rendering：クライアントサイドレンダリング)
+* SSR (Server Side Rendering：サーバーサイドレンダリング)
+
+### CSR
+
+
+
+### SSR
 
 
